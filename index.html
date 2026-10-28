@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax ejercicio Alumnos</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&family=Rajdhani:wght@300;400;500&display=swap');
+
+        body {
+            margin: 0;
+            background-color:
+                #061851;
+        }
+
+     
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80vh;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            pointer-events: none;
+        }
+
+        .fila-superior {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .fila-superior .bienvenida {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .fila-superior .bienvenida h2 {
+            color: #ffffff;
+            font-family: "Genos", sans-serif;
+            font-weight: 600;
+            font-size: 2.2rem;
+            line-height: 1;
+            margin: 0 0 10px 0;
+            white-space: nowrap;
+        }
+
+        .fila-superior .bienvenida img {
+            width: 320px;
+            margin: 0;
+        }
+
+        .separador {
+            width: 4px;
+            height: 180px;
+            background-color: #d0d0d0;
+        }
+
+        .fila-superior .titulo {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .fila-superior .titulo h2 {
+            color: #ffffff;
+            font-family: "Genos", sans-serif;
+            font-weight: 600;
+            font-size: 3.2rem;
+            line-height: 1;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .fila-superior .titulo h1 {
+            font-family: "Genos", sans-serif;
+            font-weight: 600;
+            font-size: 4.5rem;
+            line-height: 1;
+            margin: 0;
+            background: linear-gradient(to bottom, #efefef, #8e9abd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .fila-superior .titulo h2,
+        .fila-superior .titulo h1 {
+            line-height: 0.7;
+        }
+
+        .seccion-boton {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .seccion-boton img {
+            width: 300px;
+            margin: 0;
+        }
+
+        .boton {
+            pointer-events: auto;
+            display: inline-block;
+            min-width: 320px;
+            padding: 20px 40px;
+            background-color: #f2ad42;
+            color: #000000;
+            border-radius: 12px;
+            font-family: "Genos", sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .boton:hover {
+            transform: scale(1.05);
+        }
+
+        .capa-color {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(6, 24, 81, 0.671);
+            z-index: 6;
+            pointer-events: none;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #parallax-container {
+            position: relative;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        #layer1 {
+            position: absolute;
+            z-index: 1;
+            background-image: url('img/Capa1.png');
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            will-change: transform;
+        }
+
+        #layer2 {
+            position: absolute;
+            z-index: 3;
+            inset: -1%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            will-change: transform;
+        }
+
+        #layer2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        #layer3 {
+            z-index: 4;
+            position: absolute;
+            bottom: -210px;
+            left: -15%;
+            width: 160%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            will-change: transform;
+        }
+
+        #layer4 {
+            position: absolute;
+            z-index: 5;
+            bottom: -300px;
+            left: 0;
+            width: 200%;
+            height: 45%;
+            will-change: transform;
+        }
+
+        .completo {
+            width: 100%;
+            height: auto;
+        }
+
+        #layer1,
+        #layer2,
+        #layer3,
+        #layer4 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .titulo-contenidos h1{
+            text-align: center;
+            color: #efefef;
+            font-family: "Genos", sans-serif;
+        }
+
+        h6{
+            color: #626f95;
+            font-weight: 100;
+            font-family: "Exo", sans-serif;
+            text-align: center;
+        }
+
+        .logos img{
+            width: 30%;
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);  /* 2 columnas */
+            gap: 40px;
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+       .tarjeta {
+            position: relative;
+            min-width: 0;            
+            min-height: 340px;
+            padding: 45px 40px;
+            background-color: rgba(6, 24, 81, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            overflow: hidden;      
+        }
+
+        .tarjeta .texto {
+            position: relative;
+            z-index: 2;
+            max-width: 65%;        
+        }
+
+        .tarjeta h3 {
+            color: #ffffff;
+            font-family: "Genos", sans-serif;
+            font-weight: 600;
+            font-size: 2rem;
+            margin: 0 0 20px 0;
+        }
+
+        .tarjeta p {
+            color: #e6e6e6;
+            font-family: "Rajdhani", sans-serif;
+            font-size: 1.3rem;
+            line-height: 1.5;
+            margin: 0 0 40px 0;
+        }
+
+        .btn-ver {
+            display: block;
+            width: 100%;
+            padding: 18px 0;
+            background-color: #f2ad42;
+            color: #000000;
+            border-radius: 12px;
+            font-family: "Genos", sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .tarjeta img {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 100%;           
+            width: auto;            
+            margin: 0;
+            pointer-events: none;
+        }
+
+     
+        @media (max-width: 800px) {
+            .tarjetas {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="overlay">
+
+        <div class="fila-superior">
+            <div class="bienvenida">
+                <h2>BIENVENIDOS A</h2>
+                <img src="img/LOGO.png" alt="Halo-Logo">
+            </div>
+
+            <div class="separador"></div>
+
+            <div class="titulo">
+                <h2>LA WIKI</h2>
+                <h1>OFICIAL</h1>
+            </div>
+        </div>
+
+        <div class="seccion-boton">
+            <img src="img/imgboton.png" alt="Master Chief y Cortana">
+            <a href="#" class="boton">Botón</a>
+        </div>
+
+    </div>
+
+    <div id="parallax-container">
+
+        <div id="layer1"></div>
+
+        <div id="layer2">
+            <img src="img/Capa2.png">
+        </div>
+
+        <div id="layer3">
+            <img class="completo" src="img/Capa3.png">
+        </div>
+
+        <div id="layer4">
+            <img class="completo" src="img/Capa4.png">
+        </div>
+
+        <div class="capa-color"></div>
+
+    </div>
+
+    <div class="titulo-contenidos">
+        <h1>Contenidos</h1>
+    </div>
+
+
+    <section>
+
+    <div class="tarjetas">
+
+        <article class="tarjeta">
+            <div class="texto">
+                <h3>Historia y Franquicia</h3>
+                <p>Conoce el origen de Halo, su evolución y la historia que convirtió a la saga en un referente.</p>
+                <a href="#" class="btn-ver">Ver</a>
+            </div>
+            <img src="img/master.png" alt="Master Chief">
+        </article>
+
+        <article class="tarjeta">
+            <div class="texto">
+                <h3>Importancia en la industria</h3>
+                <p>Descubre cómo Halo marcó una época y dejó su huella en la industria de los videojuegos.</p>
+                <a href="#" class="btn-ver">Ver</a>
+            </div>
+            <img src="img/cortana.png" alt="Cortana">
+        </article>
+
+        <article class="tarjeta">
+            <div class="texto">
+                <h3>Halo en otros medios</h3>
+                <p>Explora cómo el universo de Halo llegó más allá de los videojuegos, incluyendo libros, series y otros formatos.</p>
+                <a href="#" class="btn-ver">Ver</a>
+            </div>
+            <img src="img/alien.png" alt="Alien soldado">
+        </article>
+
+        <article class="tarjeta">
+            <div class="texto">
+                <h3>Cameos y referencias</h3>
+                <p>Encuentra los guiños, cameos y referencias de Halo que quizá pasaste por alto.</p>
+                <a href="#" class="btn-ver">Ver</a>
+            </div>
+            <img src="img/soldado.png" alt="Soldado">
+        </article>
+
+        <article class="tarjeta">
+            <div class="texto">
+                <h3>Mercancía</h3>
+                <p>Conoce los productos, coleccionables y artículos inspirados en el universo de Halo.</p>
+                <a href="#" class="btn-ver">Ver</a>
+            </div>
+            <img src="img/alien2.png" alt="Alien soldado pequeño">
+        </article>
+
+        <article class="tarjeta">
+            <div class="texto">
+                <h3>La música de la saga de Halo</h3>
+                <p>Sumérgete en las melodías y composiciones que dieron identidad al universo de Halo.</p>
+                <a href="#" class="btn-ver">Ver</a>
+            </div>
+            <img src="img/disco.png" alt="Disco de música">
+        </article>
+
+    </div>
+
+</section>
+
+ <div class="aclaracion">
+        <h6>El contenido protegido por derechos de autor que pueda aparecer en este sitio, como imágenes, capturas de
+            pantalla, ilustraciones, logotipos, fragmentos <br>audiovisuales o referencias, se utiliza únicamente como
+            material de apoyo, comentario, análisis, crítica, documentación o <br>demostración de los temas tratados. La
+            inclusión de estos materiales no pretende reclamar su propiedad ni transferir ningún derecho sobre ellos.
+        </h6>
+    </div>
+
+    <div class="logos">
+        <img src="img/logos.png" alt="logos de empresas">
+    </div>
+
+    <div class="copyright">
+        <h6>© 2026 Halo Fan Site. Todos los derechos reservados. Halo y sus elementos relacionados son propiedad de sus
+            respectivos titulares. Este sitio utiliza cookies para mejorar la experiencia de navegación y analizar el
+            uso del sitio.</h6>
+    </div>
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const layer1 = document.getElementById('layer1');
+            const layer2 = document.getElementById('layer2');
+            const layer3 = document.getElementById('layer3');
+            const layer4 = document.getElementById('layer4');
+            const container = document.getElementById('parallax-container');
+
+            //Definimos las velocidades de desplazamiento
+            const speed1 = 0.0; // El fondo se mueve más rápido
+            const speed2 = 0.1;
+            const speed3 = 0.3; // El frente se mueve más lento
+            const speed4 = 0.5; // El frente se mueve más lento
+
+            function updateParallax() {
+                // Es para que obtengamos la posición de scroll del elemento contenedor (respecto al top de la ventana)
+                const scrollOffset = container.getBoundingClientRect().top;
+
+
+                // Multiplicamos el desplazamiento por la velocidad de cada capa
+
+                layer1.style.transform = `translate3d(0, ${scrollOffset * speed1}px, 0)`;
+
+                layer2.style.transform = `translate3d(0, ${scrollOffset * speed2}px, 0)`;
+
+                layer3.style.transform = `translate3d(0, ${scrollOffset * speed3}px, 0)`;
+
+                layer4.style.transform = `translate3d(0, ${scrollOffset * speed4}px, 0)`;
+
+            }
+
+            //Agregamos el listener para el evento
+            window.addEventListener('scroll', updateParallax);
+
+            updateParallax();
+        });
+    </script>
+</body>
+
+</html>
